@@ -22,6 +22,21 @@ stdenv.mkDerivation rec {
     at-spi2-atk at-spi2-core
   ];
 
+  dontWrapQtApps = true;
+
+  # libqt5_shim.so / libqt6_shim.so are optional GTK/Qt portal integration
+  # shims Helium probes for at runtime (KDE file dialogs etc). Neither Qt5
+  # nor Qt6 is a real dependency of the browser itself, so let autoPatchelf
+  # skip them rather than pulling in all of Qt.
+  autoPatchelfIgnoreMissingDeps = [
+    "libQt6Core.so.6"
+    "libQt6Gui.so.6"
+    "libQt6Widgets.so.6"
+    "libQt5Core.so.5"
+    "libQt5Gui.so.5"
+    "libQt5Widgets.so.5"
+  ];
+
   unpackPhase = ''
     dpkg-deb --fsys-tarfile $src | tar x --no-same-permissions --no-same-owner
   '';
