@@ -6,11 +6,11 @@
 
 stdenv.mkDerivation rec {
   pname = "helium";
-  version = "0.22.2.1";
+  version = "0.22.4.1";
 
   src = fetchurl {
     url = "https://github.com/imputnet/helium-linux/releases/download/${version}/helium-bin_${version}-1_amd64.deb";
-    sha256 = "1wciwpi0j3hjppqg8a2760dcivsk0vxyry40c2p4qga8azaxw1gl";
+    sha256 = "1adq3gqrzgmllh77knzy8agkp383jwicb5lknws7ns9c4jlx7jzg";
   };
 
   nativeBuildInputs = [ dpkg autoPatchelfHook wrapGAppsHook3 ];
